@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React from 'react';
-import App from '../config/App.js';
+import AppConfig from '../config/AppConfig.js';
 import Login from './auth/Login.js';
 import Loader from './Loader.js';
 
@@ -24,7 +24,7 @@ class DefaultEndPoint extends React.Component {
     }
 
     checkIfGuest() {
-        if(App.user == 'Guest') {
+        if(AppConfig.user == 'Guest') {
             return(
                 <this.renderIfGuest />
             );
@@ -36,8 +36,13 @@ class DefaultEndPoint extends React.Component {
     }
 
     componentDidMount() {
-        axios.get(App.backUrl + '/test').then(response => {
-            response.data.result.includes('token') ? App.user = 'Guest' : App.user = response.data.result;
+
+        axios.get(AppConfig.backUrl + '/test').then(response => {
+            if(response.data.result.includes('hello')) {
+                AppConfig.user = response.data.result;
+            } else {
+                AppConfig.user = 'Guest';
+            }
             this.setState({connected: true});
         });
     }

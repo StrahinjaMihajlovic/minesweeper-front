@@ -1,7 +1,6 @@
 import axios from 'axios';
 import React from 'react';
 import AppConfig from "../../config/AppConfig.js";
-import { isExpired, decodeToken } from "react-jwt";
 import App from '../../App.js';
 import reactDom from 'react-dom';
 
@@ -23,7 +22,7 @@ class Login extends React.Component {
             if(response.data.access_token) {
                 AppConfig.jwt = 'Bearer ' + response.data.access_token;
                 axios.defaults.headers.common['Authorization'] = AppConfig.jwt;
-                document.cookie = 'token=' + AppConfig.jwt;
+                document.cookie = 'token=' + AppConfig.jwt + '; SameSite=lax';
                 reactDom.render(<App />, document.getElementById('root'));
             }
         }).catch(error => {

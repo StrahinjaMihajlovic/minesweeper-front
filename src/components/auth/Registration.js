@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import AppConfig from '../../config/AppConfig.js';
-import {Redirect} from "react-router-dom/cjs/react-router-dom.min";
+import {withRouter} from "react-router-dom/cjs/react-router-dom.min";
 class Registration extends React.Component {
 
     constructor(props) {
@@ -18,7 +18,7 @@ class Registration extends React.Component {
             password: event.target[2].value
         }).then(response => {
             if(response.data.result === 'success') {
-                <Redirect to='/'/>
+                this.props.history.push('/login');
             }
         }).catch(error => {
             console.log(error);
@@ -33,9 +33,9 @@ class Registration extends React.Component {
                         <h1 className='mb-12'>
                             Fill in the form below to become our user
                         </h1>
-                        <form onSubmit={this.handleSubmit} method='POST' action={AppConfig.backUrl + '/login'}>
+                        <form onSubmit={this.handleSubmit} method='POST' action={AppConfig.backUrl}>
                         <div  className='mb-12'>
-                            <input placeholder='Enter your email' type='email' name='email' onChange={this.handleChange}/>
+                            <input placeholder='Enter your email' type='email' name='email'/>
                         </div>
                         <div className='mb-12'>
                             <input placeholder='Enter your name' type='text' name='name'/>
@@ -57,4 +57,4 @@ class Registration extends React.Component {
     }
 }
 
-export default Registration;
+export default withRouter(Registration);

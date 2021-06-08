@@ -3,7 +3,7 @@ import React from 'react';
 import AppConfig from '../config/AppConfig.js';
 import Login from './auth/Login.js';
 import Loader from './Loader.js';
-
+import RenderPageFromUrl from './RenderPageFromUrl.js'
 
 
 class DefaultEndPoint extends React.Component {
@@ -31,7 +31,7 @@ class DefaultEndPoint extends React.Component {
         } 
 
         return(
-            'hello'
+            <RenderPageFromUrl />
         );
     }
 

@@ -6,6 +6,7 @@ import React from 'react';
 import reactDom from 'react-dom';
 import AppConfig from "../config/AppConfig";
 import axios from "axios";
+import Store from "./store/Store";
 
 class RenderPageFromUrl extends React.Component {
 
@@ -36,7 +37,8 @@ class RenderPageFromUrl extends React.Component {
         return (
             <React.Fragment>
                 <Route path='/register'><Registration/></Route>
-                <Route path='/'><Login /></Route>
+                <Route path='/store'><Store /></Route>
+                <Route exact path='/'><Login /></Route>
             </React.Fragment>
         );
     }

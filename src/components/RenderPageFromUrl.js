@@ -26,28 +26,28 @@ class RenderPageFromUrl extends React.Component {
 
     renderProtectedPaths() {
         return (
-            <React.Fragment>
+            <Switch>
                 <Route path='/'>Hello</Route>
                 <Route path='/logout' />
-            </React.Fragment>
+            </Switch>
         );
     }
 
     renderUnprotectedPaths() {
         return (
-            <React.Fragment>
+            <Switch>
                 <Route path='/register'><Registration/></Route>
                 <Route path='/store'><Store /></Route>
-                <Route exact path='/'><Login /></Route>
-            </React.Fragment>
+                <Route path='*'><Login /></Route>
+            </Switch>
         );
     }
 
     render() {
         return (
-            <Switch>
+            <React.Fragment>
                 {AppConfig.isLoggedIn ? this.renderProtectedPaths() : this.renderUnprotectedPaths()}
-            </Switch>
+            </React.Fragment>
         );
     } 
 }

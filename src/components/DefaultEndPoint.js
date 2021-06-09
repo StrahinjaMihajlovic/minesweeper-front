@@ -1,17 +1,16 @@
 import axios from 'axios';
-import React from 'react';
+import Authorization from './auth/Authorization.js'
 import AppConfig from '../config/AppConfig.js';
 import Login from './auth/Login.js';
 import Loader from './Loader.js';
+import RenderPageFromUrl from './RenderPageFromUrl.js'
 
 
-
-class DefaultEndPoint extends React.Component {
+class DefaultEndPoint extends Authorization {
     
 
     constructor(props) {
         super(props);
-        this.state = {connected: false};
         this.checkIfGuest = this.checkIfGuest.bind(this);
     }
 
@@ -24,27 +23,20 @@ class DefaultEndPoint extends React.Component {
     }
 
     checkIfGuest() {
-        if(AppConfig.user == 'Guest') {
+        if(AppConfig.isLoggedIn) {
             return(
-                <this.renderIfGuest />
+                <RenderPageFromUrl />
+                
             );
         } 
 
         return(
-            'hello'
+            <this.renderIfGuest />
         );
     }
 
     componentDidMount() {
-
-        axios.get(AppConfig.backUrl + '/test').then(response => {
-            if(response.data.result.includes('hello')) {
-                AppConfig.user = response.data.result;
-            } else {
-                AppConfig.user = 'Guest';
-            }
-            this.setState({connected: true});
-        });
+        this.isLoggedIn();
     }
 
     render() {

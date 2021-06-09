@@ -11,28 +11,6 @@ class DefaultEndPoint extends Authorization {
 
     constructor(props) {
         super(props);
-        this.checkIfGuest = this.checkIfGuest.bind(this);
-    }
-
-
-
-    renderIfGuest() {
-        return (
-            <Login  />
-        );
-    }
-
-    checkIfGuest() {
-        if(AppConfig.isLoggedIn) {
-            return(
-                <RenderPageFromUrl />
-                
-            );
-        } 
-
-        return(
-            <this.renderIfGuest />
-        );
     }
 
     componentDidMount() {
@@ -42,7 +20,7 @@ class DefaultEndPoint extends Authorization {
     render() {
         let display;
         if(this.state.connected) {
-            display = <this.checkIfGuest />
+            display = <RenderPageFromUrl />
         } else {
             display = <Loader />
         }

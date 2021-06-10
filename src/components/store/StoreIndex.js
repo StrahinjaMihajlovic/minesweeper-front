@@ -1,0 +1,50 @@
+import React from 'react';
+import Store from './Store';
+import StoreOptions from './StoreOptions';
+import axios from 'axios';
+import AppConfig from '../../config/AppConfig';
+class StoreIndex extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {sort: 'created_at', items: [], page: 1};
+        this.handleSortChange = this.handleSortChange.bind(this);
+    }
+
+    componentDidMount() {
+        this.getItems();
+    }
+
+    async getItems(stateUpdateFunction) {
+        await stateUpdateFunction;
+        axios.get(AppConfig.backUrl + '/store?page=' + this.state.page + '&sort=' + this.state.sort).then(response => {
+            if(response.data.items){
+                let pulledItems = [];
+                response.data.items.forEach(element => {
+                    pulledItems.push(element);
+                });
+                this.setState({items: pulledItems});
+            }
+        });
+    }
+
+    // Handles change from storeOption
+    handleSortChange(event) {
+        this.getItems(this.setState({sort: event.target.value}));
+    }
+
+    render() {
+        return (
+            <div id='store-wrapper' className='flex'>
+                <div className='w-1/5'>
+                    <StoreOptions onSortChange={this.handleSortChange}/>
+                </div>
+                <div className='flex flex-wrap items' id='items'>
+                    <Store sort={this.state.sort} items={this.state.items}/>
+                </div>
+            </div>
+        );
+        
+    }
+}
+
+export default StoreIndex;

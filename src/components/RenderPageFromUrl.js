@@ -6,7 +6,7 @@ import React from 'react';
 import reactDom from 'react-dom';
 import AppConfig from "../config/AppConfig";
 import axios from "axios";
-import Store from "./store/Store";
+import StoreIndex from "./store/StoreIndex";
 
 class RenderPageFromUrl extends React.Component {
 
@@ -14,7 +14,7 @@ class RenderPageFromUrl extends React.Component {
         if(this.props.history.location.pathname.includes('/logout')){
             axios.post(AppConfig.backUrl + '/logout'); 
             AppConfig.isLoggedIn = false;
-            document.cookie = 'token= ; expires=Thu, 01 Jan 1970 00:00:00 GMT';
+            document.cookie = 'token= ; expires=Thu, 01 Jan 1970 00:00:00 GMT'; //TODO pull those parameters as global consts somewhere
             reactDom.render(<App />, document.getElementById('root'));
             this.props.history.push('/login');
         }
@@ -37,7 +37,7 @@ class RenderPageFromUrl extends React.Component {
         return (
             <Switch>
                 <Route path='/register'><Registration/></Route>
-                <Route path='/store'><Store /></Route>
+                <Route path='/store'><StoreIndex /></Route>
                 <Route path='*'><Login /></Route>
             </Switch>
         );

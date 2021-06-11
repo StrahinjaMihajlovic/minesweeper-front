@@ -12,8 +12,8 @@ class RenderPageFromUrl extends React.Component {
 
     redirectLoogout() {
         if(this.props.history.location.pathname.includes('/logout')){
-            axios.post(AppConfig.backUrl + '/logout'); 
-            AppConfig.isLoggedIn = false;
+            axios.post(AppConfig.getState().backUrl + '/logout'); 
+            AppConfig.dispatch({type: 'change_login_state'});
             document.cookie = 'token= ; expires=Thu, 01 Jan 1970 00:00:00 GMT'; //TODO pull those parameters as global consts somewhere
             reactDom.render(<App />, document.getElementById('root'));
             this.props.history.push('/login');
@@ -46,7 +46,7 @@ class RenderPageFromUrl extends React.Component {
     render() {
         return (
             <React.Fragment>
-                {AppConfig.isLoggedIn ? this.renderProtectedPaths() : this.renderUnprotectedPaths()}
+                {AppConfig.getState().isLoggedIn ? this.renderProtectedPaths() : this.renderUnprotectedPaths()}
             </React.Fragment>
         );
     } 

@@ -14,16 +14,15 @@ class Login extends React.Component {
     // Handles login form and sends data to the login endpoint 
     handleSubmit(event) {
         event.preventDefault();
-        axios.post(AppConfig.backUrl + '/login',  {
+        axios.post(AppConfig.getState().backUrl + '/login',  {
             email: event.target[0].value,
             password: event.target[1].value
         }).then(response => {
-
-            if(response.data.access_token) {
-                AppConfig.jwt = 'Bearer ' + response.data.access_token;
-                axios.defaults.headers.common['Authorization'] = AppConfig.jwt;
-                AppConfig.isLoggedIn = true;
-                document.cookie = 'token=' + AppConfig.jwt + '; SameSite=lax';
+            let responseJWT = response.data.access_token
+            if(responseJWT) {
+                AppConfig.dispatch({type: 'change_login_state'});
+                AppConfig.dispatch({type: 'set_jwt', jwt: responseJWT});
+                document.cookie = 'token=' + AppConfig.getState().jwt + '; SameSite=lax';
                 reactDom.render(<App />, document.getElementById('root'));
             }
         }).catch(error => {

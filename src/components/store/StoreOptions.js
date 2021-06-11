@@ -9,6 +9,7 @@ class StoreOptions extends React.Component {
         this.state = {value: ''};
     }
 
+    //handles use changing the sort method
     handleChange(event) {
         this.props.onSortChange(event);
     }

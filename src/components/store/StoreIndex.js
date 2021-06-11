@@ -14,9 +14,11 @@ class StoreIndex extends React.Component {
         this.getItems();
     }
 
+    //Pulls items from the api and sets them as state, after finishing set state from handleSortChange
+    //function
     async getItems(stateUpdateFunction) {
         await stateUpdateFunction;
-        axios.get(AppConfig.backUrl + '/store?page=' + this.state.page + '&sort=' + this.state.sort).then(response => {
+        axios.get(AppConfig.getState().backUrl + '/store?page=' + this.state.page + '&sort=' + this.state.sort).then(response => {
             if(response.data.items){
                 let pulledItems = [];
                 response.data.items.forEach(element => {
@@ -34,11 +36,11 @@ class StoreIndex extends React.Component {
 
     render() {
         return (
-            <div id='store-wrapper' className='flex'>
-                <div className='w-1/5'>
-                    <StoreOptions onSortChange={this.handleSortChange}/>
+            <div id='store-wrapper' className='flex mt-16 border-t-8'>
+                <div className='w-1/5 border-r-4 mx-2'>
+                    <StoreOptions onSortChange={this.handleSortChange}/> 
                 </div>
-                <div className='flex flex-wrap items' id='items'>
+                <div className='flex flex-wrap border-l-4' id='items'>
                     <Store sort={this.state.sort} items={this.state.items}/>
                 </div>
             </div>

@@ -9,8 +9,10 @@ class Authorization extends React.Component{
     }
 
     isLoggedIn() {
-        axios.get(AppConfig.backUrl + '/test').then(response => {
-            AppConfig.isLoggedIn = response.data.result.includes('hello');
+        axios.get(AppConfig.getState().backUrl + '/test').then(response => {
+            if(response.data.result.includes('hello') && !AppConfig.getState().isLoggedIn) {
+                AppConfig.dispatch({type: 'change_login_state'});
+            }
             this.setState({connected: true});
         }).catch(error => {
             console.log(error);

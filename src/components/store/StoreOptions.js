@@ -19,10 +19,10 @@ class StoreOptions extends React.Component {
             <div>
                 <h4>Sort items by</h4>
                 <select id='sort-option' defaultValue='created_at' onChange={this.handleChange}>
-                    <option value='created_at'>Newer</option>
+                    <option value='created_at-desc'>Newer</option>
                     <option value='name'>Name</option>
                     <option value='price'>Price</option>
-                    <option value='old'>Old</option>
+                    <option value='created_at'>Old</option>
                 </select>
             </div>
         );

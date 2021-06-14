@@ -16,9 +16,9 @@ class StoreIndex extends React.Component {
 
     //Pulls items from the api and sets them as state, after finishing set state from handleSortChange
     //function
-    async getItems(stateUpdateFunction) {
+    async getItems(stateUpdateFunction, order) {
         await stateUpdateFunction;
-        axios.get(AppConfig.getState().backUrl + '/store?page=' + this.state.page + '&sort=' + this.state.sort).then(response => {
+        axios.get(AppConfig.getState().backUrl + '/store?page=' + this.state.page + '&sort=' + this.state.sort + '&order=' + order).then(response => {
             if(response.data.items){
                 let pulledItems = [];
                 response.data.items.forEach(element => {
@@ -31,7 +31,14 @@ class StoreIndex extends React.Component {
 
     // Handles change from storeOption
     handleSortChange(event) {
-        this.getItems(this.setState({sort: event.target.value}));
+        let value = event.target.value;
+        let order = '';
+        if(value.includes('desc')) {
+            order = 'desc';
+            value = value.replace('-desc', '');
+        }
+        
+        this.getItems(this.setState({sort: value}), order);
     }
 
     render() {

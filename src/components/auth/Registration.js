@@ -12,7 +12,7 @@ class Registration extends React.Component {
 
     handleSubmit(event) {
         event.preventDefault();
-        axios.post(AppConfig.backUrl + '/register',  {
+        axios.post(AppConfig.getState().backUrl + '/register',  {
             email: event.target[0].value,
             name: event.target[1].value,
             password: event.target[2].value

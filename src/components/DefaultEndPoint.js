@@ -1,14 +1,9 @@
-import axios from 'axios';
 import Authorization from './auth/Authorization.js'
-import AppConfig from '../config/AppConfig.js';
-import Login from './auth/Login.js';
 import Loader from './Loader.js';
 import RenderPageFromUrl from './RenderPageFromUrl.js'
 
-
-class DefaultEndPoint extends Authorization {
-    
-
+// Invoked as a wrapper for every page depending on the user authorization
+class DefaultEndPoint extends Authorization {  
     constructor(props) {
         super(props);
     }

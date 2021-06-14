@@ -43,11 +43,11 @@ class StoreIndex extends React.Component {
 
     render() {
         return (
-            <div id='store-wrapper' className='flex mt-16 border-t-8'>
+            <div id='store-wrapper' className='flex mt-16 border-t-8 min-h-screen'>
                 <div className='w-1/5 border-r-4 mx-2'>
                     <StoreOptions onSortChange={this.handleSortChange}/> 
                 </div>
-                <div className='flex flex-wrap border-l-4' id='items'>
+                <div className='flex flex-wrap border-l-4 content-start' id='items'>
                     <Store sort={this.state.sort} items={this.state.items}/>
                 </div>
             </div>

@@ -1,3 +1,11 @@
 .item-image {
     background-size: contain;
 }
+
+.buying-button-parent:hover > button {
+    background-color: crimson;
+}
+
+.buying-button:hover {
+    box-shadow: 0 0 0 0.2rem #dc37eb;
+}

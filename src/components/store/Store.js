@@ -9,7 +9,7 @@ class Store extends React.Component {
     renderItems() {
         let items = [];
         this.props.items.forEach(element => {
-            items.push(<Item name={element.name} description={element.description} price={element.price} key={element.id}/>);
+            items.push(<Item image={element.image} name={element.name} description={element.description} price={element.price} key={element.id}/>);
         })
         return items;
     }

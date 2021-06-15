@@ -1,6 +1,5 @@
 import React from 'react';
-import reactDom from 'react-dom';
-import Store from './Store';
+import StoreCategoryOption from './StoreCategoryOption';
 
 class StoreOptions extends React.Component {
     constructor(props) {
@@ -24,6 +23,8 @@ class StoreOptions extends React.Component {
                     <option value='price'>Price</option>
                     <option value='created_at'>Old</option>
                 </select>
+                <h4>Filter items by category:</h4>
+                <StoreCategoryOption onCategoryChange={this.props.onCategoryChange}/>
             </div>
         );
     }

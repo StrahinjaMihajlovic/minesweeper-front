@@ -27,7 +27,7 @@ class RenderPageFromUrl extends React.Component {
     renderProtectedPaths() {
         return (
             <Switch>
-                <Route path='/'>Hello</Route>
+                <Route path='/'><StoreIndex /></Route>
                 <Route path='/logout' />
             </Switch>
         );
@@ -37,7 +37,6 @@ class RenderPageFromUrl extends React.Component {
         return (
             <Switch>
                 <Route path='/register'><Registration/></Route>
-                <Route path='/store'><StoreIndex /></Route>
                 <Route path='*'><Login /></Route>
             </Switch>
         );

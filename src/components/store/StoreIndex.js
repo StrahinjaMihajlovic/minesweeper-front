@@ -3,11 +3,14 @@ import Store from './Store';
 import StoreOptions from './StoreOptions';
 import axios from 'axios';
 import AppConfig from '../../config/AppConfig';
+import PagePagination from './pagination/PagePagination';
+
 class StoreIndex extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {sort: 'created_at', items: [], page: 1};
+        this.state = {sort: 'created_at', items: [], page: 1, pages: 1};
         this.handleSortChange = this.handleSortChange.bind(this);
+        this.handlePageChange = this.handlePageChange.bind(this);
     }
 
     componentDidMount() {
@@ -25,6 +28,7 @@ class StoreIndex extends React.Component {
                     pulledItems.push(element);
                 });
                 this.setState({items: pulledItems});
+                this.setState({pages: response.data.pages});
             }
         });
     }
@@ -41,6 +45,10 @@ class StoreIndex extends React.Component {
         this.getItems(this.setState({sort: value}), order);
     }
 
+    handlePageChange(event) {
+        this.getItems(this.setState({page: event.target.value}));
+    }
+
     render() {
         return (
             <div id='store-wrapper' className='flex mt-16 border-t-8 min-h-screen'>
@@ -49,6 +57,7 @@ class StoreIndex extends React.Component {
                 </div>
                 <div className='flex flex-wrap border-l-4 content-start' id='items'>
                     <Store sort={this.state.sort} items={this.state.items}/>
+                    <PagePagination currPage={this.state.page} numberOfPages={this.state.pages} onChangeButtons={this.handlePageChange} />
                 </div>
             </div>
         );

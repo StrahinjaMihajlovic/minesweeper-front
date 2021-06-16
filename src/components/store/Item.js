@@ -1,7 +1,12 @@
 import React from 'react';
-import AppConfig from '../../config/AppConfig';
 import '../assets/items.css'
+import DisplayItem from './DisplayItem';
 class Item extends React.Component {
+    constructor(props) {
+        super(props);
+    }
+
+
 
     render() {
         return (
@@ -17,10 +22,10 @@ class Item extends React.Component {
                     <p>Description of the item:</p>
                     {this.props.description}
                 </div>
-                <button className='bg-red-300 rounded-full py-3 px-6 buying-button'>
+                <button onClick={this.props.renderDisplay} className='bg-red-300 rounded-full py-3 px-6 buying-button'>
                     Buy me!
                 </button>
-                
+
             </div>
         );
     }

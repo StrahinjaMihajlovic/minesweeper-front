@@ -21,6 +21,9 @@ class DisplayItem extends React.Component {
                        
                     </div>
                     <h3>Price: {this.props.item.price}</h3>
+                    <button onClick={this.props.renderDisplay} className='my-8 bg-red-300 rounded-full py-3 px-6 buying-button'>
+                    Buy me!
+                    </button>
                 </div>
             </div>
         </div>

@@ -20,7 +20,7 @@ class StoreCategoryOption extends React.Component{
     getCategories() {
         axios.get(AppConfig.getState().backUrl + '/store/category').then(response => {
             let respondedCategories = [<option key='default' value=''>All</option>];
-            response.data.categories.forEach(element => {
+            response.data.forEach(element => {
                 respondedCategories.push(<option key={element.id} value={element.name}> {element.name} </option>);
             });
             this.setState({categories: respondedCategories});

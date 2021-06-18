@@ -24,13 +24,14 @@ class StoreIndex extends React.Component {
         await stateUpdateFunction;
         axios.get(AppConfig.getState().backUrl + '/store?page=' + this.state.page 
         + '&sort=' + this.state.sort + '&order=' + order + '&category=' + this.state.category).then(response => {
-            if(response.data.items){
+            let items = response.data;
+            if(items){
                 let pulledItems = [];
-                response.data.items.forEach(element => {
+                items.data.forEach(element => {
                     pulledItems.push(element);
                 });
                 this.setState({items: pulledItems});
-                this.setState({pages: response.data.pages});
+                this.setState({pages: items.meta.pagination.total_pages});
             }
         });
     }

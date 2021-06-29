@@ -2,17 +2,15 @@ import React, { useState } from 'react';
 import Field from './Field';
 
 const Row = (props) => {
-    const [fields, setFields] = useState(renderFields(props.rowSize, props.data));
-
-    return (<div className='flex'>{fields}</div>);
+    return (<div className='flex'>{renderFields(props.rowSize, props.data, props.fieldclick)}</div>);
 }
 
 
-function renderFields(rowSize, data) {
+function renderFields(rowSize, data, action) {
     let fields = [];
     for(let i = 1; i <= +rowSize; i++) {
         let fieldNumber = `${i}`;
-        fields.push(<Field key={fieldNumber} value={fieldNumber} data={data[i - 1]}/>);
+        fields.push(<Field key={fieldNumber} value={fieldNumber} data={data[i - 1]} fieldclick={action}/>);
     }
 
     return fields;

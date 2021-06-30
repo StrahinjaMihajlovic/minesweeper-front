@@ -3,15 +3,17 @@ import Row from './Row';
 import '../assets/game/tableAssets.css';
 import axios from 'axios';
 import AppConfig from '../../config/AppConfig';
+import { useParams } from 'react-router-dom';
 
 let actionOpenedField;
+
 
 const Table = (props) => {
     const [rows, setRows] = useState('loading...');
     const [shouldUpdate, setShouldUpdate] = useState(-1);
-
+    let gameId = useParams();
     actionOpenedField = (id) => {openField(id, setShouldUpdate)}
-    useEffect(() => {updateTable(setRows)}, [shouldUpdate]);
+    useEffect(() => {updateTable(setRows, gameId.id)}, [shouldUpdate]);
     //debugger;
     return (<div className='grid grid-cols-1' id='gameTable'>{rows}</div>);
 };
@@ -22,8 +24,8 @@ function openField(id, setShouldUpdate) {
     });
 }
 
-async function updateTable(setRows) {
-    let result = await axios.get(AppConfig.getState().backUrl + '/game/101').then(response => {
+async function updateTable(setRows, game) {
+    let result = await axios.get(AppConfig.getState().backUrl + '/game/' + game).then(response => {
         let result = renderRows(response.data);
         return result;
     });

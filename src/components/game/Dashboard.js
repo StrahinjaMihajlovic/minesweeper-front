@@ -21,7 +21,7 @@ const Dashboard = (props) => {
 function getGames (setGames) {
     axios.get(AppConfig.getState().backUrl + '/game').then(response => {
         let games = [];
-        response.data.forEach(element => {
+        response.data.data.forEach(element => {
             games.push(<GamePreview key={element.id} game={element} />);
         })
         setGames(games);

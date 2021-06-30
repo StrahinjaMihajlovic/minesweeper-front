@@ -12,7 +12,7 @@ const Game = (props) => {
         <Route exact path='/game'>
             <Dashboard />
         </Route>
-        <Route path='/game/*'>
+        <Route path='/game/:id'>
             <Table tableSize={size}/>
         </Route>
     </Switch>

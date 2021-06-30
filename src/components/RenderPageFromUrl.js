@@ -29,7 +29,7 @@ class RenderPageFromUrl extends React.Component {
         return (
             <Switch>
                 
-                
+                <Route path='/game'> <Game /> </Route>
                 <Route path='/logout' />
                 <Route path='/'> <StoreIndex /> </Route>
             </Switch>
@@ -39,7 +39,7 @@ class RenderPageFromUrl extends React.Component {
     renderUnprotectedPaths() {
         return (
             <Switch>
-                <Route path='/game'> <Game /> </Route>
+                
                 <Route path='/register'> <Registration/> </Route>
                 <Route path='*'> <Login /> </Route>
             </Switch>

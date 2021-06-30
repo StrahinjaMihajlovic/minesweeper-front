@@ -7,6 +7,7 @@ import reactDom from 'react-dom';
 import AppConfig from "../config/AppConfig";
 import axios from "axios";
 import StoreIndex from "./store/StoreIndex";
+import Game from "./game/Game";
 
 class RenderPageFromUrl extends React.Component {
 
@@ -27,8 +28,10 @@ class RenderPageFromUrl extends React.Component {
     renderProtectedPaths() {
         return (
             <Switch>
-                <Route path='/'><StoreIndex /></Route>
+                
+                <Route path='/game'> <Game /> </Route>
                 <Route path='/logout' />
+                <Route path='/'> <StoreIndex /> </Route>
             </Switch>
         );
     }
@@ -36,8 +39,9 @@ class RenderPageFromUrl extends React.Component {
     renderUnprotectedPaths() {
         return (
             <Switch>
-                <Route path='/register'><Registration/></Route>
-                <Route path='*'><Login /></Route>
+                
+                <Route path='/register'> <Registration/> </Route>
+                <Route path='*'> <Login /> </Route>
             </Switch>
         );
     }

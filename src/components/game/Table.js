@@ -11,7 +11,7 @@ const Table = (props) => {
     const [shouldUpdate, setShouldUpdate] = useState(-1);
 
     actionOpenedField = (id) => {openField(id, setShouldUpdate)}
-    useEffect(() => {updateTable(setRows, shouldUpdate)}, [shouldUpdate]);
+    useEffect(() => {updateTable(setRows)}, [shouldUpdate]);
     //debugger;
     return (<div className='grid grid-cols-1' id='gameTable'>{rows}</div>);
 };
@@ -22,11 +22,7 @@ function openField(id, setShouldUpdate) {
     });
 }
 
-function updateTable(setRows, shouldUpdate) {
-    returnFieldsFromApi(setRows);    
-}
-
-async function returnFieldsFromApi(setRows) {
+async function updateTable(setRows) {
     let result = await axios.get(AppConfig.getState().backUrl + '/game/101').then(response => {
         let result = renderRows(response.data);
         return result;

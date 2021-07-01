@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Switch, Route } from 'react-router-dom';
 import Dashboard from './Dashboard';
+import GameCreation from './GameCreation';
 import Table from './Table';
 
 const Game = (props) => {
@@ -9,6 +10,7 @@ const Game = (props) => {
     return (
     <div className='w-screen h-screen'> 
     <Switch>
+        <Route exact path='/game/create'><GameCreation /></Route>
         <Route exact path='/game'>
             <Dashboard />
         </Route>

@@ -21,12 +21,15 @@ const GameCreation = (props) => {
                             
                         }}/>
                     <label htmlFor='y-axis'>Y axis</label>
-                    <input value={yNumber} className='border-2 mx-6' type='number' name='y-axis' onChange={ event => {
+                    <input value={yNumber} className='border-2 mx-6' type='number' name='y-axis' onChange={event => {
+                            let newFields = bombs.bombs;
                             setYNumber(event.target.value);
-                            if(bombs.length < event.target.value) {
-                                let newFields = bombs
-                                setBombs(newFields[event.target.value] = Array(xNumber).fill(false));
+                            if(newFields.length < parseInt(event.target.value)) {
+                                
+                                newFields[event.target.value - 1] = Array(xNumber).fill(false);
+                                setBombs({bombs: newFields});
                             }
+                            
                         }}/>
                 </div>
             </div>
@@ -40,6 +43,7 @@ const GameCreation = (props) => {
 // generates fields for a game in progress given size and bombs parameters
 function generateFields(sizeX, sizeY, bombs, setBombs) {
     let rows = [];
+
     for(let i = 1; i <= sizeY; i++) {
         let fields = []
        for(let j = 1; j <= sizeX; j++) {

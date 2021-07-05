@@ -1,4 +1,6 @@
+import axios from 'axios';
 import React, { useState } from 'react';
+import AppConfig from '../../config/AppConfig';
 import Field from './Field';
 import FieldBuilder from './FieldBuilder';
 
@@ -10,8 +12,8 @@ const GameCreation = (props) => {
     const [bombs, setBombs] = useState({bombs: Array(5).fill().map(() => { return Array(5).fill(false) } ) });
     return (
         <div>
-            {xNumber + ':' + yNumber}
-            <h1 className='pt-6 '>Create a new game</h1>
+            <button className='inline-block' onClick={() => {sendRequestForCreation(xNumber, yNumber, bombs.bombs.flat(), setIsCreated)}}><h1 className='pt-6 '>Create a new game</h1></button>
+            {isCreated ?<p className='text-green-700'>The game has been successfully created!</p> : ''}
             <div>
                 <p className='my-12'>Enter size of the table axises</p>
                 <div id='axis-control' className='flex justify-center my-10'>
@@ -38,6 +40,14 @@ const GameCreation = (props) => {
             </div>
         </div>
     );
+}
+
+function sendRequestForCreation(x, y, bombs, setIsCreated) {
+    axios.post(AppConfig.getState().backUrl + '/game/create', {x: x, y: y, bombs: bombs}).then(response => {
+        setIsCreated(true);
+    }).catch(err => {
+        'error'; //TODO implement error handling
+    });
 }
 
 // generates fields for a game in progress given size and bombs parameters

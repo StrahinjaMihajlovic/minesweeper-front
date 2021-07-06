@@ -40,6 +40,7 @@ function renderRows(data) {
         let rowApi = Object.values(data.fields).splice((i-1)*size[1], size[1]);
         rows.push(<Row key={rowValue} value={rowValue} rowSize={size[1]} data={rowApi} fieldclick={actionOpenedField}/>);
     }
+    debugger;
     return rows;
 }
 

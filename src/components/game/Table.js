@@ -18,12 +18,14 @@ const Table = (props) => {
     return (<div className='grid grid-cols-1' id='gameTable'>{rows}</div>);
 };
 
+// sends request when the user clicks on a field
 function openField(id, setShouldUpdate) {
     axios.post(AppConfig.getState().backUrl + '/game/open/' + id).then(() => {
         setShouldUpdate(id);
     });
 }
-
+// TODO find a better way of handling update of the table as the current is relatevly slow 
+// updates whole table when the user opens a field
 async function updateTable(setRows, game) {
     let result = await axios.get(AppConfig.getState().backUrl + '/game/' + game).then(response => {
         let result = renderRows(response.data);

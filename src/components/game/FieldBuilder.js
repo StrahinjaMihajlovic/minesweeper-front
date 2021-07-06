@@ -3,6 +3,7 @@ import { parse } from "postcss";
 // TODO make this class more in line to the builder pattern
 class FieldBuilder {
 
+    // builds fields for users who plays the games
     buildForGame(id, fieldNumber, contains, clickAction) {
 
         return(

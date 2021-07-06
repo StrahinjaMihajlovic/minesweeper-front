@@ -11,7 +11,7 @@ const GameCreation = (props) => {
     const [yNumber, setYNumber] = useState({value: 5});
     //fils the bombs object with array of bombs at specific positions. The array imitates displayed table
     const [bombs, setBombs] = useState({bombs: Array(5).fill().map(() => { return Array(5).fill(false) } ) });
-
+    //updates the bombs array whenever the size of axis changes
     useLayoutEffect(() => {setSize(xNumber.value, yNumber.value, bombs.bombs, setBombs)}, [xNumber, yNumber]);
 
     return (
@@ -47,10 +47,10 @@ const GameCreation = (props) => {
     );
 }
 
+// sends request to the server when the user clicks on 'create game'
 function sendRequestForCreation(x, y, bombs, setIsCreated) {
     axios.post(AppConfig.getState().backUrl + '/game/create', {x: x, y: y, bombs: bombs}).then(response => {
-        console.log(response.data)
-        //setIsCreated(true);
+        setIsCreated(true);
     }).catch(err => {
         console.log(err.response.data); //TODO implement error handling
     });

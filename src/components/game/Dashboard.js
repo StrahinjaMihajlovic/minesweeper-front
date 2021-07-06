@@ -1,5 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import AppConfig from '../../config/AppConfig';
 import GamePreview from './GamePreview';
 
@@ -11,8 +12,13 @@ const Dashboard = (props) => {
     return (
         <div>
             <h1 className='text-6xl mt-4 mb-12'>Browse minesweep games</h1>
-            <div className='flex justify-center border-t-4 p-8'>
-                {games ? games : 'loading games'}
+            <div className='border-t-4 flex'>
+                <div className='inline-block p-4 w-1/5 border-r-4'>
+                    <Link to='/game/create'><button>Create a game</button></Link>
+                </div>
+                <div className='flex justify-center p-8 w-4/5 '>
+                    {games ? games : 'loading games'}
+                </div>
             </div>
         </div>
     );
